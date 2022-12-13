@@ -8,11 +8,17 @@
 
             var startingPositions = GetStartingPositions(map, 'S', 'a');
 
+            List<int> canBeSkipped = new();
             List<int> shortestDistances = new();
 
             foreach (var startingPosition in startingPositions)
             {
-                shortestDistances.Add(FindShortestPath(map, startingPosition));
+                if (!canBeSkipped.Contains(startingPosition))
+                {
+                    var shortestPath = FindShortestPath(map, startingPosition);
+                    shortestDistances.Add(shortestPath.Item1);
+                    canBeSkipped.AddRange(shortestPath.Item2);
+                }
             }
 
             Console.WriteLine("Shortest route: " + shortestDistances.Min());
@@ -24,17 +30,23 @@
 
             var startingPositions = GetStartingPositions(map, 'S', 'S');
 
+            List<int> canBeSkipped = new();
             List<int> shortestDistances = new();
 
             foreach (var startingPosition in startingPositions)
             {
-                shortestDistances.Add(FindShortestPath(map, startingPosition));
+                if (!canBeSkipped.Contains(startingPosition))
+                {
+                    var shortestPath = FindShortestPath(map, startingPosition);
+                    shortestDistances.Add(shortestPath.Item1);
+                    canBeSkipped.AddRange(shortestPath.Item2);
+                }
             }
 
             Console.WriteLine("Shortest route: " + shortestDistances.Min());
         }
 
-        static int FindShortestPath(char[,] map, int startPosition)
+        static (int, List<int>) FindShortestPath(char[,] map, int startPosition)
         {
             var input = map.Cast<char>().ToArray();
             var graphSize = input.Length;
@@ -146,7 +158,7 @@
                 }
             }
 
-            return Dijkstra(graph, startPosition, graphSize, endPosition);
+            return Dijkstra(graph, startPosition, graphSize, endPosition, map);
         }
 
         static List<int> GetStartingPositions(char[,] matrix, char s1, char s2)
@@ -193,10 +205,13 @@
         }
 
         // need to optimize
-        static int Dijkstra(int[,] graph, int source, int verticesCount, int endIndex)
+        static (int, List<int>) Dijkstra(int[,] graph, int source, int verticesCount, int endIndex, char[,] map)
         {
             int[] distance = new int[verticesCount];
             bool[] shortestPathTreeSet = new bool[verticesCount];
+
+            List<int> foundedStartPoints = new List<int>();
+            bool foundedPath = false;
 
             for (int i = 0; i < verticesCount; ++i)
             {
@@ -212,14 +227,40 @@
                 shortestPathTreeSet[u] = true;
 
                 for (int v = 0; v < verticesCount; ++v)
+                {
                     if (!shortestPathTreeSet[v] && Convert.ToBoolean(graph[u, v]) && distance[u] != int.MaxValue && distance[u] + graph[u, v] < distance[v])
+                    {
                         distance[v] = distance[u] + graph[u, v];
+
+                        if (v == endIndex) foundedPath = true;
+                 
+                    }  
+                } 
             }
 
+            if (!foundedPath)
+            {
+                for (int i = 0; i< distance.Length; i++)
+                {
+                    if (distance[i] < int.MaxValue && CheckIfStartPoint(map, i))
+                    {
+                        foundedStartPoints.Add(i);
+                    }
+                }
+            }
 
-            Console.WriteLine("RESULT: " + distance[endIndex]);
+            Console.WriteLine("RESULT for " + source +": " + distance[endIndex]);
 
-            return distance[endIndex];
+            return (distance[endIndex], foundedStartPoints);
+        }
+
+        static bool CheckIfStartPoint(char[,] map, int number)
+        {
+            var cols = map.GetLength(1);
+            var row = number / cols;
+            var col = number % cols;
+
+            return map[row, col] == 'a';
         }
 
         static int MinimumDistance(int[] distance, bool[] shortestPathTreeSet, int verticesCount)
