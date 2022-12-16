@@ -329,23 +329,7 @@ namespace AdventOfCode2022._2022
 
         static (int, int, int, int) GetBoundings(IEnumerable<Point> points)
         {
-            var result = points.Aggregate(
-                  new
-                  {
-                      MinX = int.MaxValue,
-                      MaxX = int.MinValue,
-                      MinY = int.MaxValue,
-                      MaxY = int.MinValue,
-                  },
-                  (accumulator, p) => new
-                  {
-                      MinX = Math.Min(p.X, accumulator.MinX),
-                      MaxX = Math.Max(p.X, accumulator.MaxX),
-                      MinY = Math.Min(p.Y, accumulator.MinY),
-                      MaxY = Math.Max(p.Y, accumulator.MaxY),
-                  });
-
-            return (result.MaxX, result.MinX, result.MaxY, result.MinY);
+            return Point.GetBoundings(points);
         }
     }
 }
