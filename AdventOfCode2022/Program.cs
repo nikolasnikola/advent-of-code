@@ -2,7 +2,10 @@
 
 using AdventOfCode2022._2022;
 
-Day15.Part2(4000000);
+Day16.Part2();
+
+//Day15.Part2(4000000);
+//Day15.Part1(10);
 
 //Day14.Part1();
 //Day14.Part2();
