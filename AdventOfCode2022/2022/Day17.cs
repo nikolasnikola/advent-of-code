@@ -1,4 +1,5 @@
-﻿using AdventOfCode2022.Dto.Day17;
+﻿using System.Diagnostics;
+using AdventOfCode2022.Dto.Day17;
 
 namespace AdventOfCode2022._2022
 {
@@ -12,7 +13,10 @@ namespace AdventOfCode2022._2022
 
             List<Rock> rocks = new();
 
-            var maxPossibleHeight = CreateRockStack(rocks, 10000);
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
+
+            var maxPossibleHeight = CreateRockStack(rocks, 2022);
             var rows = maxPossibleHeight + 5;
 
             var map = CreateEmtptyMap(rows);
@@ -158,12 +162,15 @@ namespace AdventOfCode2022._2022
             var heightAboveMatcher = uncounted > 0 ? heightsPerItemAfterMatcher[uncounted - 1] : 0;
             var result = ((1000000000000 - nonRepeatablItems) / totalRocksInMatcher) * matcherFlowTotalHeight + heightBellowMatcher + heightAboveMatcher;
 
+            sw.Stop();
+
             //PrintMap(map, true, new(), currentHeight);
 
             Console.WriteLine("\n**************");
             Console.WriteLine($"Matcher found after height: {heightBellowMatcher}");
             Console.WriteLine($"Total rocks in matcher: {totalRocksInMatcher} rocks");
             Console.WriteLine($"Total height after 1000000000000 rocks: { result }");
+            Console.WriteLine($"Time elapsed: {sw.Elapsed}");
             Console.WriteLine("**************");
         }
 
