@@ -125,4 +125,8 @@
     <Folder Include="Dto\Day15\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Dijkstra.NET" Version="1.2.1" />
+  </ItemGroup>
+
 </Project>
