@@ -2,6 +2,9 @@
 
 using AdventOfCode2022._2022;
 
+//Day21.Part1();
+Day21.Part2();
+
 //Day20.Part1();
 //Day20.Part2();
 
