@@ -13,7 +13,6 @@ namespace AdventOfCode2022._2022
 
             Print(positions, true);
 
-
             Console.WriteLine("**************");
             Console.WriteLine($"Round without moves: {result}");
             Console.WriteLine("**************");
