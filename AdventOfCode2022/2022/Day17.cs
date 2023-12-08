@@ -1,13 +1,13 @@
 ﻿using System.Diagnostics;
-using AdventOfCode2022.Dto.Day17;
+using AdventOfCode.Models.Day17;
 
-namespace AdventOfCode2022._2022
+namespace AdventOfCode._2022
 {
     internal static class Day17
     {
         internal static void Part2()
         {
-            var instructions = Reader.ReadAsString("Day17").ToCharArray();
+            var instructions = Reader.ReadAsString("2022", "Day17").ToCharArray();
             var instructionLength = instructions.Length;
             var debug = false;
 
@@ -176,7 +176,7 @@ namespace AdventOfCode2022._2022
 
         internal static void Part1()
         {
-            var instructions = Reader.ReadAsString("Day17").ToCharArray();
+            var instructions = Reader.ReadAsString("2022", "Day17").ToCharArray();
             var instructionLength = instructions.Length;
             var debug = false;
 

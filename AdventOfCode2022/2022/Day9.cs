@@ -1,6 +1,6 @@
-﻿using AdventOfCode2022.Dto.Day9;
+﻿using AdventOfCode.Models.Day9;
 
-namespace AdventOfCode2022._2022
+namespace AdventOfCode._2022
 {
     internal static class Day9
     {
@@ -16,7 +16,7 @@ namespace AdventOfCode2022._2022
 
         static void MoveRope(Func<Movement[], int, int, int> stepsFunction)
         {
-            var moveSeries = Reader.ReadAsObjectArray<Movement>("Day9");
+            var moveSeries = Reader.ReadAsObjectArray<Movement>("2022", "Day9");
 
             var movementsCount = moveSeries.Aggregate(
                 new

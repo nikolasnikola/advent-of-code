@@ -1,10 +1,10 @@
-﻿namespace AdventOfCode2022._2022
+﻿namespace AdventOfCode._2022
 {
     internal static class Day13
     {
         internal static void Part2()
         {
-            var input = Reader.ReadAsString("Day13");
+            var input = Reader.ReadAsString("2022", "Day13");
 
             var items = input.Split("\r\n\r\n").SelectMany(i => i.Split("\r\n")).ToList();
 
@@ -26,7 +26,7 @@
 
         internal static void Part1()
         {
-            var input = Reader.ReadAsString("Day13");
+            var input = Reader.ReadAsString("2022", "Day13");
 
             var pairs = input.Split("\r\n\r\n");
 

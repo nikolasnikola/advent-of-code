@@ -1,7 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using System.Text;
-using AdventOfCode2022;
+using AdventOfCode;
 
 class COA2021
 {
@@ -17,7 +17,7 @@ class COA2021
 
     void Puzzle1()
     {
-        var numbers = Reader.ReadAsIntegerArray("Test1");
+        var numbers = Reader.ReadAsIntegerArray("2021", "Test1");
         int result = 0;
 
         for (int i = 1; i < numbers.Count(); i++)
@@ -33,7 +33,7 @@ class COA2021
 
     void Puzzle2()
     {
-        var numbers = Reader.ReadAsIntegerArray("Test1");
+        var numbers = Reader.ReadAsIntegerArray("2021", "Test1");
         int result = 0;
 
         for (int i = 0; i < numbers.Count() - 3; i++)
@@ -46,7 +46,7 @@ class COA2021
 
     void Puzzle3()
     {
-        var movements = Reader.ReadAsObjectArray<SubmarineMovement>("Test2");
+        var movements = Reader.ReadAsObjectArray<SubmarineMovement>("2021", "Test2");
 
         var result = movements.Aggregate(
             new
@@ -65,7 +65,7 @@ class COA2021
 
     void Puzzle4()
     {
-        var movements = Reader.ReadAsObjectArray<SubmarineMovement>("Test2");
+        var movements = Reader.ReadAsObjectArray<SubmarineMovement>("2021", "Test2");
 
         var result = movements.Aggregate(
             new
@@ -86,7 +86,7 @@ class COA2021
 
     void Puzzle5()
     {
-        var cucumberMap = Reader.ReadAsCharMatrix("Text4");
+        var cucumberMap = Reader.ReadAsCharMatrix("2021", "Text4");
 
         var totalSteps = 1;
 

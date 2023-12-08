@@ -1,12 +1,12 @@
-﻿using AdventOfCode2022.Dto.Day14;
+﻿using AdventOfCode.Models.Day14;
 
-namespace AdventOfCode2022._2022
+namespace AdventOfCode._2022
 {
     internal static class Day15
     {
         internal static void Part2(int limit)
         {
-            var sensorsData = Reader.ReadAsStringList("Day15");
+            var sensorsData = Reader.ReadAsStringList("2022", "Day15");
 
             var sensorBeacon = sensorsData.Select(sd => GetSensorBeaconPoints(sd)).ToList();
 
@@ -21,7 +21,7 @@ namespace AdventOfCode2022._2022
 
         internal static void Part1(int resultRow)
         {
-            var sensorsData = Reader.ReadAsStringList("Day15Test");
+            var sensorsData = Reader.ReadAsStringList("2022", "Day15Test");
 
             var sensorBeacon = sensorsData.Select(sd => GetSensorBeaconPoints(sd)).ToList();
 

@@ -1,8 +1,8 @@
-﻿using AdventOfCode2022.Dto.Day16;
+﻿using AdventOfCode.Models.Day16;
 using Dijkstra.NET.Graph.Simple;
 using Dijkstra.NET.ShortestPath;
 
-namespace AdventOfCode2022._2022
+namespace AdventOfCode._2022
 {
     internal static class Day16
     {
@@ -10,7 +10,7 @@ namespace AdventOfCode2022._2022
 
         internal static void Part2()
         {
-            var valvesData = Reader.ReadAsStringList("Day16");
+            var valvesData = Reader.ReadAsStringList("2022", "Day16");
 
             var graph = new Graph();
             var valvesByName = GetValves(valvesData, graph).ToList().ToDictionary(k => k.Name, v => v);
@@ -37,7 +37,7 @@ namespace AdventOfCode2022._2022
 
         internal static void Part1()
         {
-            var valvesData = Reader.ReadAsStringList("Day16");
+            var valvesData = Reader.ReadAsStringList("2022", "Day16");
 
             var graph = new Graph();
             var valvesByName = GetValves(valvesData, graph).ToList().ToDictionary(k => k.Name, v => v);

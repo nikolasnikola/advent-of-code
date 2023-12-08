@@ -1,10 +1,10 @@
-﻿namespace AdventOfCode2022._2022
+﻿namespace AdventOfCode._2022
 {
     internal static class Day4
     {
         internal static void Part2()
         {
-            var pairs = Reader.ReadAsStringList("Day4");
+            var pairs = Reader.ReadAsStringList("2022", "Day4");
 
             var result = pairs.Select(p => GetPair(p)).Where(p => PairOverlapOther(p)).Count();
 
@@ -13,7 +13,7 @@
 
         internal static void Part1()
         {
-            var pairs = Reader.ReadAsStringList("Day4");
+            var pairs = Reader.ReadAsStringList("2022", "Day4");
 
             var result = pairs.Select(p => GetPair(p)).Where(p => PairFullyContainOther(p)).Count();
 

@@ -1,10 +1,10 @@
-﻿namespace AdventOfCode2022._2022
+﻿namespace AdventOfCode._2022
 {
     internal static class Day8
     {
         internal static void Part2()
         {
-            var map = Reader.ReadAsIntegerMatrix("Day8");
+            var map = Reader.ReadAsIntegerMatrix("2022", "Day8");
 
             var rows = map.GetLength(0);
             var cols = map.GetLength(1);
@@ -26,7 +26,7 @@
 
         internal static void Part1()
         {
-            var map = Reader.ReadAsIntegerMatrix("Day8");
+            var map = Reader.ReadAsIntegerMatrix("2022", "Day8");
 
             var rows = map.GetLength(0);
             var cols = map.GetLength(1);

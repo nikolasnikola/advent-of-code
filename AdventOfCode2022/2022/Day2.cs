@@ -1,10 +1,10 @@
-﻿namespace AdventOfCode2022._2022
+﻿namespace AdventOfCode._2022
 {
     internal static class Day2
     {
         internal static void Part2()
         {
-            var games = Reader.ReadAsStringList("Day2");
+            var games = Reader.ReadAsStringList("2022", "Day2");
 
             var rounds = games
                 .Select(g => g.Split(' '))
@@ -20,7 +20,7 @@
 
         internal static void Part1()
         {
-            var games = Reader.ReadAsStringList("Day2");
+            var games = Reader.ReadAsStringList("2022", "Day2");
 
             var rounds = games
                 .Select(g => g.Split(' '))

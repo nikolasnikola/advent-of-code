@@ -1,10 +1,10 @@
-﻿namespace AdventOfCode2022._2022
+﻿namespace AdventOfCode._2022
 {
     internal static class Day6
     {
         internal static void Part2()
         {
-            var signal = Reader.ReadAsString("Day6");
+            var signal = Reader.ReadAsString("2022", "Day6");
 
             var result = GetMarketValue(signal, 14);
 
@@ -13,7 +13,7 @@
 
         internal static void Part1()
         {
-            var signal = Reader.ReadAsString("Day6");
+            var signal = Reader.ReadAsString("2022", "Day6");
 
             var result = GetMarketValue(signal, 4);
 

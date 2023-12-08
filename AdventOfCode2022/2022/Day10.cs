@@ -1,17 +1,17 @@
-﻿namespace AdventOfCode2022._2022
+﻿namespace AdventOfCode._2022
 {
     internal static class Day10
     {
         internal static void Part2()
         {
-            var commands = Reader.ReadAsStringList("Day10");
+            var commands = Reader.ReadAsStringList("2022", "Day10");
 
             GenerateCRTScreen(commands);
         }
 
         internal static void Part1()
         {
-            var commands = Reader.ReadAsStringList("Day10");
+            var commands = Reader.ReadAsStringList("2022", "Day10");
 
             var result = GetSignalStrengthsSum(commands);
 

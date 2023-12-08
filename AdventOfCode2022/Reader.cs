@@ -1,42 +1,49 @@
 ﻿using System.Reflection;
 
-namespace AdventOfCode2022
+namespace AdventOfCode
 {
     internal static class Reader
     {
-        internal static int[] ReadAsIntegerArray(string fileName)
+        internal static int[] ReadAsIntegerArray(string year, string fileName)
         {
-            var lines = GetLines(fileName);
+            var lines = GetLines(year, fileName);
 
             return lines.Select(l => int.Parse(l)).ToArray();
         }
 
-        internal static string[] ReadAsStringList(string fileName)
+        internal static long[] ReadAsLongArray(string year, string fileName)
         {
-            var lines = GetLines(fileName);
+            var lines = GetLines(year, fileName);
+
+            return lines.Select(l => long.Parse(l)).ToArray();
+        }
+
+        internal static string[] ReadAsStringList(string year, string fileName)
+        {
+            var lines = GetLines(year, fileName);
 
             return lines;
         }
 
-        internal static string ReadAsString(string fileName)
+        internal static string ReadAsString(string year, string fileName)
         {
-            string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? string.Empty, @$"Data\{fileName}.txt");
+            string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? string.Empty, @$"{year}\Data\{fileName}.txt");
             string text = File.ReadAllText(path);
 
             return text;
         }
 
-        internal static T?[] ReadAsObjectArray<T>(string fileName) where T : class
+        internal static T?[] ReadAsObjectArray<T>(string year,string fileName) where T : class
         {
-            var lines = GetLines(fileName);
+            var lines = GetLines(year, fileName);
 
             return lines.Select(l => Activator.CreateInstance(typeof(T), l.Split(" ")) as T).ToArray();
 
         }
 
-        internal static char[,] ReadAsCharMatrix(string fileName)
+        internal static char[,] ReadAsCharMatrix(string year, string fileName)
         {
-            var lines = GetLines(fileName);
+            var lines = GetLines(year, fileName);
             int i = 0;
             char[,] matrix = new char[lines.Count(), lines.First().Length];
 
@@ -54,9 +61,9 @@ namespace AdventOfCode2022
             return matrix;
         }
 
-        internal static int[,] ReadAsIntegerMatrix(string fileName, char? splitter = null)
+        internal static int[,] ReadAsIntegerMatrix(string year, string fileName, char? splitter = null)
         {
-            var lines = GetLines(fileName);
+            var lines = GetLines(fileName, year);
 
             int i = 0, j = 0;
             int[,] matrix = new int[lines.Count(), lines.First().Length];
@@ -76,9 +83,9 @@ namespace AdventOfCode2022
             return matrix;
         }
 
-        private static string[] GetLines(string fileName)
+        private static string[] GetLines(string year, string fileName)
         {
-            string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? string.Empty, @$"Data\{fileName}.txt");
+            string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? string.Empty, @$"{year}\Data\{fileName}.txt");
             return File.ReadAllLines(path);
         }
     }

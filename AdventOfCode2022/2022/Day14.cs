@@ -1,12 +1,12 @@
-﻿using AdventOfCode2022.Dto.Day14;
+﻿using AdventOfCode.Models.Day14;
 
-namespace AdventOfCode2022._2022
+namespace AdventOfCode._2022
 {
     internal static class Day14
     {
         internal static void Part2()
         {
-            var rockPaths = Reader.ReadAsStringList("Day14");
+            var rockPaths = Reader.ReadAsStringList("2022", "Day14");
 
             var paths = rockPaths.Select(rp => rp.Split(" -> "));
 
@@ -41,7 +41,7 @@ namespace AdventOfCode2022._2022
 
         internal static void Part1()
         {
-            var rockPaths = Reader.ReadAsStringList("Day14");
+            var rockPaths = Reader.ReadAsStringList("2022", "Day14");
 
             var paths = rockPaths.Select(rp => rp.Split(" -> "));
 

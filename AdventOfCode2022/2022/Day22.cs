@@ -1,12 +1,12 @@
-﻿using AdventOfCode2022.Dto.Day22;
+﻿using AdventOfCode.Models.Day22;
 
-namespace AdventOfCode2022._2022
+namespace AdventOfCode._2022
 {
     internal static class Day22
     {
         internal static void Part2()
         {
-            var input = Reader.ReadAsString("Day22").Split("\r\n\r\n");
+            var input = Reader.ReadAsString("2022", "Day22").Split("\r\n\r\n");
 
             var graph = GetGraph(input[0]);
 
@@ -25,7 +25,7 @@ namespace AdventOfCode2022._2022
 
         internal static void Part1()
         {
-            var input = Reader.ReadAsString("Day22").Split("\r\n\r\n");
+            var input = Reader.ReadAsString("2022", "Day22").Split("\r\n\r\n");
 
             var graph = GetGraph(input[0]);
 

@@ -1,7 +1,7 @@
 ﻿using System.Text.RegularExpressions;
-using AdventOfCode2022.Dto.Day19;
+using AdventOfCode.Models.Day19;
 
-namespace AdventOfCode2022._2022
+namespace AdventOfCode._2022
 {
     public class Day19State : IEquatable<Day19State>
     {
@@ -89,7 +89,7 @@ namespace AdventOfCode2022._2022
     {
         internal static void Part2()
         {
-            var input = Reader.ReadAsStringList("Day19");
+            var input = Reader.ReadAsStringList("2022", "Day19");
 
             var blueprints = GetBlueprints(input).Take(3);
 
@@ -109,7 +109,7 @@ namespace AdventOfCode2022._2022
 
         internal static void Part1()
         {
-            var input = Reader.ReadAsStringList("Day19");
+            var input = Reader.ReadAsStringList("2022", "Day19");
 
             var blueprints = GetBlueprints(input);
 

@@ -1,12 +1,12 @@
-﻿using AdventOfCode2022.Dto.Day21;
+﻿using AdventOfCode.Models.Day21;
 
-namespace AdventOfCode2022._2022
+namespace AdventOfCode._2022
 {
     internal static class Day21
     {
         internal static void Part2()
         {
-            var items = Reader.ReadAsStringList("Day21");
+            var items = Reader.ReadAsStringList("2022", "Day21");
             var monkeyYells = GetMonkeyYells(items);
 
             var rootMonkey = monkeyYells.Single(m => m.MonkeyName == "root");
@@ -37,7 +37,7 @@ namespace AdventOfCode2022._2022
 
         internal static void Part1()
         {
-            var items = Reader.ReadAsStringList("Day21");
+            var items = Reader.ReadAsStringList("2022", "Day21");
             var monkeyYells = GetMonkeyYells(items);
 
             var rootMonkey = monkeyYells.Single(m => m.MonkeyName == "root");

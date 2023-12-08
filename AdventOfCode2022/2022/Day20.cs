@@ -1,13 +1,13 @@
-﻿using AdventOfCode2022.Dto.Day20;
+﻿using AdventOfCode.Models.Day20;
 
-namespace AdventOfCode2022._2022
+namespace AdventOfCode._2022
 {
 
     internal static class Day20
     {
         internal static void Part2()
         {
-            var items = Reader.ReadAsIntegerArray("Day20").ToList();
+            var items = Reader.ReadAsIntegerArray("2022", "Day20").ToList();
             var length = items.Count;
 
             var nodes = GetNodes(items, 811589153);
@@ -38,7 +38,7 @@ namespace AdventOfCode2022._2022
 
         internal static void Part1()
         {
-            var items = Reader.ReadAsIntegerArray("Day20").ToList();
+            var items = Reader.ReadAsIntegerArray("2022", "Day20").ToList();
             var length = items.Count;
 
             var nodes = GetNodes(items, 1);

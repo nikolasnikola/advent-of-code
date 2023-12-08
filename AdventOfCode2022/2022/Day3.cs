@@ -1,10 +1,10 @@
-﻿namespace AdventOfCode2022._2022
+﻿namespace AdventOfCode._2022
 {
     internal static class Day3
     {
         internal static void Part2()
         {
-            var items = Reader.ReadAsStringList("Day3");
+            var items = Reader.ReadAsStringList("2022", "Day3");
 
             var splittedItems = items.Chunk(3);
 
@@ -18,7 +18,7 @@
 
         internal static void Part1()
         {
-            var items = Reader.ReadAsStringList("Day3");
+            var items = Reader.ReadAsStringList("2022", "Day3");
 
             var duplicatedItems = items.SelectMany(i => FindDuplicatedItems(i));
 

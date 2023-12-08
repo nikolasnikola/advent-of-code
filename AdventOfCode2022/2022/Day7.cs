@@ -1,12 +1,12 @@
-﻿using AdventOfCode2022.Dto.Day7;
+﻿using AdventOfCode.Models.Day7;
 
-namespace AdventOfCode2022._2022
+namespace AdventOfCode._2022
 {
     internal static class Day7
     {
         internal static void Part2()
         {
-            var commands = Reader.ReadAsStringList("Day7");
+            var commands = Reader.ReadAsStringList("2022", "Day7");
             var dir = GetTree(commands);
 
             var flatDirectories = GetWithSubItems(dir).ToList();
@@ -22,7 +22,7 @@ namespace AdventOfCode2022._2022
 
         internal static void Part1()
         {
-            var commands = Reader.ReadAsStringList("Day7");
+            var commands = Reader.ReadAsStringList("2022", "Day7");
             var dir = GetTree(commands);
 
             var flatDirectories = GetWithSubItems(dir);

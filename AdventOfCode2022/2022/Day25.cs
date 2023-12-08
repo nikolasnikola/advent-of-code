@@ -1,10 +1,10 @@
-﻿namespace AdventOfCode2022._2022
+﻿namespace AdventOfCode._2022
 {
     internal static class Day25
     {
         internal static void Part1()
         {
-            var snafuNumbers = Reader.ReadAsStringList("Day25");
+            var snafuNumbers = Reader.ReadAsStringList("2022", "Day25");
 
             var digitalNumbers = snafuNumbers.Select(sn => SnafuToDecimal(sn)).ToList();
 

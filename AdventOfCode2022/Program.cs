@@ -1,8 +1,8 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-using AdventOfCode2022._2022;
+using AdventOfCode._2023;
 
-Day25.Part1();
+//Day25.Part1();
 
 //Day24.Part1();
 //Day24.Part2();
@@ -49,29 +49,29 @@ Day25.Part1();
 //Day10.Part1();
 //Day10.Part2();
 
-//Day9.Part1();
-//Day9.Part2();
+//Day09.Part1();
+//Day09.Part2();
 
-//Day8.Part1();
-//Day8.Part2();
+//Day08.Part1();
+Day08.Part2();
 
-//Day7.Part1();
-//Day7.Part2();
+//Day07.Part1();
+//Day07.Part2();
 
-//Day6.Part1();
-//Day6.Part2();
+//Day06.Part1();
+//Day06.Part2();
 
-//Day5.Part1();
-//Day5.Part2();
+//Day05.Part1();
+//Day05.Part2();
 
-//Day4.Part1();
-//Day4.Part2();
+//Day04.Part1();
+//Day04.Part2();
 
-//Day3.Part1();
-//Day3.Part2();
+//Day03.Part1();
+//Day03.Part2();
 
-//Day2.Part1();
-//Day2.Part2();
+//Day02.Part1();
+//Day02.Part2();
 
-//Day1.Part1();
-//Day1.Part2();
+//Day01.Part1();
+//Day01.Part2();

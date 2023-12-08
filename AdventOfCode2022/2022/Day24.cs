@@ -1,7 +1,7 @@
 ﻿using System.Data;
-using AdventOfCode2022.Dto.Day24;
+using AdventOfCode.Models.Day24;
 
-namespace AdventOfCode2022._2022
+namespace AdventOfCode._2022
 {
     public class State
     {
@@ -56,7 +56,7 @@ namespace AdventOfCode2022._2022
 
         internal static void Part2()
         {
-            var map = Reader.ReadAsCharMatrix("Day24");
+            var map = Reader.ReadAsCharMatrix("2022", "Day24");
             var maxR = map.GetLength(0) - 2;
             var maxC = map.GetLength(1) - 2;
 
@@ -144,7 +144,7 @@ namespace AdventOfCode2022._2022
 
         internal static void Part1()
         {
-            var map = Reader.ReadAsCharMatrix("Day24");
+            var map = Reader.ReadAsCharMatrix("2022", "Day24");
             var maxR = map.GetLength(0) - 2;
             var maxC = map.GetLength(1) - 2;
 

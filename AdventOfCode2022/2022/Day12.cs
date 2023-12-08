@@ -1,10 +1,10 @@
-﻿namespace AdventOfCode2022._2022
+﻿namespace AdventOfCode._2022
 {
     internal static class Day12
     {
         internal static void Part2()
         {
-            var map = Reader.ReadAsCharMatrix("Day12");
+            var map = Reader.ReadAsCharMatrix("2022", "Day12");
 
             var startingPositions = GetStartingPositions(map, 'S', 'a');
 
@@ -26,7 +26,7 @@
 
         internal static void Part1()
         {
-            var map = Reader.ReadAsCharMatrix("Day12Test");
+            var map = Reader.ReadAsCharMatrix("2022", "Day12Test");
 
             var startingPositions = GetStartingPositions(map, 'S', 'S');
 

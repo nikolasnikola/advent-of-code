@@ -1,12 +1,12 @@
-﻿using AdventOfCode2022.Dto.Day11;
+﻿using AdventOfCode.Models.Day11;
 
-namespace AdventOfCode2022._2022
+namespace AdventOfCode._2022
 {
     internal static class Day11
     {
         internal static void Part2()
         {
-            var roundTurns = Reader.ReadAsString("Day11Test");
+            var roundTurns = Reader.ReadAsString("2022", "Day11Test");
 
             var result = ProceedRounds2(roundTurns, 1, 20);
 
@@ -17,7 +17,7 @@ namespace AdventOfCode2022._2022
 
         internal static void Part1()
         {
-            var roundTurns = Reader.ReadAsString("Day11Test");
+            var roundTurns = Reader.ReadAsString("2022", "Day11Test");
 
             var result = ProceedRounds2(roundTurns, 3, 20);
 

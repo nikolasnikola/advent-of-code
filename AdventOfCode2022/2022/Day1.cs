@@ -1,10 +1,10 @@
-﻿namespace AdventOfCode2022._2022
+﻿namespace AdventOfCode._2022
 {
     internal static class Day1
     {
         internal static void Part2()
         {
-            var calories = Reader.ReadAsString("Day1");
+            var calories = Reader.ReadAsString("2022", "Day1");
 
             var separatedByElf = calories.Split("\r\n\r\n");
 
@@ -22,7 +22,7 @@
 
         internal static void Part1()
         {
-            var calories = Reader.ReadAsString("Day1");
+            var calories = Reader.ReadAsString("2022", "Day1");
 
             var separatedByElf = calories.Split("\r\n\r\n");
 

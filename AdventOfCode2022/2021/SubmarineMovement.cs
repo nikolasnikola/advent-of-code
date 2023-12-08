@@ -1,4 +1,4 @@
-﻿namespace AdventOfCode2022
+﻿namespace AdventOfCode
 {
     public class SubmarineMovement
     {

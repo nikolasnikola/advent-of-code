@@ -1,6 +1,6 @@
-﻿using AdventOfCode2022.Dto.Day18;
+﻿using AdventOfCode.Models.Day18;
 
-namespace AdventOfCode2022._2022
+namespace AdventOfCode._2022
 {
     internal static class Day18
     {
@@ -75,7 +75,7 @@ namespace AdventOfCode2022._2022
 
         internal static void Part2()
         {
-            var pointCoordinates = Reader.ReadAsStringList("Day18");
+            var pointCoordinates = Reader.ReadAsStringList("2022", "Day18");
 
             var points = GetPointsList(pointCoordinates).ToList();
 
@@ -104,7 +104,7 @@ namespace AdventOfCode2022._2022
 
         internal static void Part1()
         {
-            var pointCoordinates = Reader.ReadAsStringList("Day18");
+            var pointCoordinates = Reader.ReadAsStringList("2022", "Day18");
 
             var points = GetPointsList(pointCoordinates).ToList();
             int result = GetLavaSurface(points);

@@ -1,11 +1,11 @@
-﻿namespace AdventOfCode2022._2022
+﻿namespace AdventOfCode._2022
 {
     internal static class Day5
     {
         internal static void Part2()
         {
-            var stacks = Reader.ReadAsStringList("Day5-1");
-            var procedure = Reader.ReadAsStringList("Day5-2");
+            var stacks = Reader.ReadAsStringList("2022", "Day5-1");
+            var procedure = Reader.ReadAsStringList("2022", "Day5-2");
 
             var stackPlan = GetStackPlan(stacks);
 
@@ -14,8 +14,8 @@
 
         internal static void Part1()
         {
-            var stacks = Reader.ReadAsStringList("Day5-1");
-            var procedure = Reader.ReadAsStringList("Day5-2");
+            var stacks = Reader.ReadAsStringList("2022", "Day5-1");
+            var procedure = Reader.ReadAsStringList("2022", "Day5-2");
 
             var stackPlan = GetStackPlan(stacks);
 
