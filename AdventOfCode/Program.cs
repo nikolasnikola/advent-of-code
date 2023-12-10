@@ -50,10 +50,10 @@ using AdventOfCode._2023;
 //Day10.Part2();
 
 //Day09.Part1();
-//Day09.Part2();
+Day09.Part2();
 
 //Day08.Part1();
-Day08.Part2();
+//Day08.Part2();
 
 //Day07.Part1();
 //Day07.Part2();
