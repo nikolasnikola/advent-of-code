@@ -61,6 +61,28 @@ namespace AdventOfCode
             return matrix;
         }
 
+        internal static char[,] ReadAsCharMatrixWithStartPoint(string year, string fileName, char startSymbol, out (int,int) point)
+        {
+            var lines = GetLines(year, fileName);
+            int i = 0;
+            char[,] matrix = new char[lines.Count(), lines.First().Length];
+            point = (0, 0);
+
+            foreach (var line in lines)
+            {
+                int j = 0;
+                foreach (var c in line)
+                {
+                    if (c == startSymbol) point = (i, j);
+                    matrix[i, j] = c;
+                    j++;
+                }
+                i++;
+            }
+
+            return matrix;
+        }
+
         internal static int[,] ReadAsIntegerMatrix(string year, string fileName, char? splitter = null)
         {
             var lines = GetLines(fileName, year);
