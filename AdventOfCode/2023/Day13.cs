@@ -1,6 +1,4 @@
-﻿using NUnit.Framework;
-
-namespace AdventOfCode._2023
+﻿namespace AdventOfCode._2023
 {
     internal static class Day13
     {
