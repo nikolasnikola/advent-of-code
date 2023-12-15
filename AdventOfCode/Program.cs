@@ -31,11 +31,11 @@ using AdventOfCode._2023;
 //Day16.Part1();
 //Day16.Part2();
 
-//Day15.Part1(2000);
-//Day15.Part2(4000000);
+//Day15.Part1();
+Day15.Part2();
 
 //Day14.Part1();
-Day14.Part2();
+//Day14.Part2();
 
 //Day13.Part1();
 //Day13.Part2();
