@@ -22,11 +22,11 @@ using AdventOfCode._2023;
 //Day19.Part1();
 //Day19.Part2();
 
-//Day18.Part1();
+Day18.Part1();
 //Day18.Part2();
 
 //Day17.Part1();
-Day17.Part2();
+//Day17.Part2();
 
 //Day16.Part1();
 //Day16.Part2();
