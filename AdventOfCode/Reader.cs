@@ -85,7 +85,7 @@ namespace AdventOfCode
 
         internal static int[,] ReadAsIntegerMatrix(string year, string fileName, char? splitter = null)
         {
-            var lines = GetLines(fileName, year);
+            var lines = GetLines(year, fileName);
 
             int i = 0, j = 0;
             int[,] matrix = new int[lines.Count(), lines.First().Length];
@@ -103,6 +103,18 @@ namespace AdventOfCode
             }
 
             return matrix;
+        }
+
+        internal static Dictionary<(int, int), int> ReadAsIntegerDictionaryMatrix(string year, string fileName, char? splitter = null)
+        {
+            var lines = GetLines(year, fileName);
+            return (
+                from row in Enumerable.Range(0, lines.Length)
+                from col in Enumerable.Range(0, lines[0].Length)
+                let cell = int.Parse(lines[row].Substring(col, 1))
+                let pos = (row, col)
+                select new KeyValuePair<(int, int), int>(pos, cell)
+            ).ToDictionary(x => x.Key, v => v.Value);
         }
 
         private static string[] GetLines(string year, string fileName)
