@@ -1,5 +1,4 @@
-﻿using System.Linq.Expressions;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
 namespace AdventOfCode._2023
 {
@@ -24,7 +23,7 @@ namespace AdventOfCode._2023
 
         internal static void Part2()
         {
-            var input = Reader.ReadAsString("2023", "Day19Test");
+            var input = Reader.ReadAsString("2023", "Day19");
             var splitted = input.Split("\r\n\r\n");
 
             var rules = splitted[0].Split("\r\n").Select(GetRule).ToDictionary(x => x.Name, x => x);
@@ -47,7 +46,67 @@ namespace AdventOfCode._2023
                     if (currentRule.Name == "in") finished = true;
 
                     var acceptedIfNothingTrue = currentRule.RuleNameIfNothingTrue == ruleNameLookup;
-                    if (acceptedIfNothingTrue)
+                    var anyAcceptance = currentRule.Items.Any(i => i.RuleNameIfTrue == ruleNameLookup);
+
+                    if (anyAcceptance)
+                    {
+                        var andConditions = new List<ExitCondition>();
+
+                        var currentConditions = new List<ExitCondition>();
+
+                        foreach (var item in currentRule.Items)
+                        {
+                            if (item.RuleNameIfTrue == ruleNameLookup)
+                            {
+                                currentConditions.Add(new ExitCondition()
+                                {
+                                    PartName = item.PartName,
+                                    Operator = item.Operator,
+                                    Value = item.Value,
+                                    IsNegation = false,
+                                    AndConditions = new List<ExitCondition>(andConditions),
+                                });
+                            }
+                            andConditions.Add(new ExitCondition()
+                            {
+                                PartName = item.PartName,
+                                Operator = item.Operator,
+                                Value = item.Value,
+                                IsNegation = true,
+                            });
+                        }
+                        var newCondition = currentConditions[0];
+                        newCondition.OrConditions = new List<ExitCondition>(currentConditions.Skip(1));
+
+                        if (acceptedIfNothingTrue)
+                        {
+                            var firstItem = currentRule.Items[0];
+                            var otherConditions = new List<ExitCondition>();
+
+                            foreach (var item in currentRule.Items.Skip(1))
+                            {
+                                otherConditions.Add(new ExitCondition()
+                                {
+                                    PartName = item.PartName,
+                                    Operator = item.Operator,
+                                    Value = item.Value,
+                                    IsNegation = true,
+                                });
+                            }
+                            newCondition.OrConditions.Add(new ExitCondition()
+                            {
+                                PartName = firstItem.PartName,
+                                Operator = firstItem.Operator,
+                                Value = firstItem.Value,
+                                IsNegation = true,
+                                AndConditions = otherConditions
+                            });
+                        }
+
+                        conditions.Add(newCondition);
+                    }
+
+                    if (!anyAcceptance && acceptedIfNothingTrue)
                     {
                         var firstItem = currentRule.Items[0];
                         var andConditions = new List<ExitCondition>();
@@ -72,42 +131,6 @@ namespace AdventOfCode._2023
                         });
                     }
 
-                    if (currentRule.Items.Any(i => i.RuleNameIfTrue == ruleNameLookup))
-                    {
-                        var andConditions = new List<ExitCondition>();
-
-                        var currentConditions = new List<ExitCondition>();
-
-                        foreach (var item in currentRule.Items)
-                        {
-                            if (item.RuleNameIfTrue == ruleNameLookup)
-                            {
-                                currentConditions.Add(new ExitCondition()
-                                {
-                                    PartName = item.PartName,
-                                    Operator = item.Operator,
-                                    Value = item.Value,
-                                    IsNegation = false,
-                                    AndConditions = new List<ExitCondition>(andConditions),
-                                });
-                                andConditions = new List<ExitCondition>();
-                            }
-                            else
-                            {
-                                andConditions.Add(new ExitCondition()
-                                {
-                                    PartName = item.PartName,
-                                    Operator = item.Operator,
-                                    Value = item.Value,
-                                    IsNegation = true,
-                                });
-                            }
-                        }
-                        var newCondition = currentConditions.First();
-                        newCondition.OrConditions = new List<ExitCondition>(currentConditions.Skip(1)); // create exit flow from all or conditions
-                        conditions.Add(newCondition);
-                    }
-
                     if (!finished)
                     {
                         ruleNameLookup = currentRule.Name;
@@ -117,21 +140,63 @@ namespace AdventOfCode._2023
                 exitConditions.Add(new Exit { Conditions = conditions });
             }
 
-            long result = 1;
-
+            var exitsWithBranches = new List<Exit>();
             foreach (var exit in exitConditions)
             {
-                var dictionary = new Dictionary<string, IEnumerable<int>>()
+                var lastCondition = exit.Conditions[0];
+
+                if (lastCondition.OrConditions != null && lastCondition.OrConditions.Any())
                 {
-                    {"x",  Enumerable.Range(1, 3999)},
-                    {"m",  Enumerable.Range(1, 3999)},
-                    {"a",  Enumerable.Range(1, 3999)},
-                    {"s",  Enumerable.Range(1, 3999)},
+                    var otherConditions = exit.Conditions.Skip(1);
+                    foreach (var orCond in lastCondition.OrConditions)
+                    {
+                        var previousItems = new List<ExitCondition>(otherConditions) { orCond };
+                        exitsWithBranches.Add(new Exit() { Conditions = previousItems });
+                    }
+                }
+                exitsWithBranches.Add(exit);
+            }
+
+            long result = 0;
+
+            foreach (var exit in exitsWithBranches)
+            {
+                long currentResult = 1;
+
+                var dictionary = new Dictionary<string, List<int>>()
+                {
+                    {"x",  Enumerable.Range(1, 4000).ToList()},
+                    {"m",  Enumerable.Range(1, 4000).ToList()},
+                    {"a",  Enumerable.Range(1, 4000).ToList()},
+                    {"s",  Enumerable.Range(1, 4000).ToList()},
                 };
 
                 foreach (var condition in exit.Conditions)
                 {
+                    dictionary[condition.PartName] = dictionary[condition.PartName].Where(i =>
+                    {
+                        bool greaterThanCondition = condition.IsNegation ? i <= condition.Value : i > condition.Value;
+                        bool lessThanCondition = condition.IsNegation ? i >= condition.Value : i < condition.Value;
+                        return condition.Operator == Operator.GreaterThan ? greaterThanCondition : lessThanCondition;
+                    }).ToList();
+
+                    foreach (var andCondition in condition.AndConditions)
+                    {
+                        dictionary[andCondition.PartName] = dictionary[andCondition.PartName].Where(i =>
+                        {
+                            bool greaterThanCondition = andCondition.IsNegation ? i <= andCondition.Value : i > andCondition.Value;
+                            bool lessThanCondition = andCondition.IsNegation ? i >= andCondition.Value : i < andCondition.Value;
+                            return andCondition.Operator == Operator.GreaterThan ? greaterThanCondition : lessThanCondition;
+                        }).ToList();
+                    }
                 }
+
+                foreach (var items in dictionary.Values)
+                {
+                    currentResult *= items.Count;
+                }
+
+                result += currentResult;
             }
 
             Console.WriteLine(result);
@@ -265,16 +330,3 @@ public enum Operator
     GreaterThan,
     LessThan,
 }
-
-/*
-px => A : (m>2090 && !a<2006) || (x <2500 && s > 800)
-in => px : s<1351
--------------------------------
-
-
-pv => A : !a>1716
-hdj => pv : !m>838
-qqz => hdj : !s>2770 && m<1801
-in => qqz : s!<1351 
---------------------------------
- */
