@@ -4,9 +4,116 @@
     {
         internal static void Part1()
         {
-            var input = Reader.ReadAsStringList("2023", "Day20Test");
+            var input = Reader.ReadAsStringList("2023", "Day20");
 
             var modules = new List<IModule>();
+            PopulateModules(input, modules);
+
+            var firstPulse = new PulseResult() { Pulse = Pulse.Low, ToModule = "broadcaster", FromModule = "button"};
+            var allPulses = new List<PulseResult>() { firstPulse };
+            var buttonCounter = 1;
+            var dictionary = modules.ToDictionary(x => x.Name, x => x);
+            var currentIteration = 0;
+            bool iterationFinished = false;
+
+            while (!(iterationFinished && (modules.Where(m => m is FlipFlopModule ffm).All(m => !(m as FlipFlopModule).IsOn) || buttonCounter == 1000)))
+            {
+                if (iterationFinished) 
+                { 
+                    allPulses.Add(new PulseResult() { Pulse = Pulse.Low, ToModule = "broadcaster", FromModule = "button" }); 
+                    buttonCounter++;
+                }
+
+                var pulse = allPulses[currentIteration++];
+
+                if (dictionary.ContainsKey(pulse.ToModule))
+                {
+                    var currentModule = dictionary[pulse.ToModule];
+
+                    var processResult = currentModule.ProceedPulse(pulse.Pulse, pulse.FromModule);
+                    if (processResult != null && processResult.Count > 0)
+                    {
+                        allPulses.AddRange(processResult);
+                    }
+                }
+
+                iterationFinished = allPulses.Count == currentIteration;
+            }
+
+            var totalRequiredCycles = 1000 / buttonCounter;
+            var remainder = 1000 % buttonCounter;
+
+            var lowPulsesInCycle = allPulses.Count(x => x.Pulse == Pulse.Low);
+            var highPulses = allPulses.Count - lowPulsesInCycle;
+
+            var result = totalRequiredCycles * lowPulsesInCycle * totalRequiredCycles * highPulses + remainder;
+
+            Console.WriteLine(result);
+        }
+
+        internal static void Part2()
+        {
+            var input = Reader.ReadAsStringList("2023", "Day20");
+
+            var modules = new List<IModule>();
+            PopulateModules(input, modules);
+
+            // manual input analyze
+            var parentTargetModule = (ConjuctionModule) modules.Single(x => x.ConnectedTo.Contains("rx")); // there is only single conjuction module with rx output real input
+            var parentsOfParent = parentTargetModule.InputModuleStates.Keys; // 4 conjuction module with parent module output
+
+            var firstPulse = new PulseResult() { Pulse = Pulse.Low, ToModule = "broadcaster", FromModule = "button" };
+            var allPulses = new List<PulseResult>() { firstPulse };
+            long buttonCounter = 1;
+            var dictionary = modules.ToDictionary(x => x.Name, x => x);
+            var currentIteration = 0;
+            bool iterationFinished = false;
+
+            var parentOFParentStates = parentsOfParent.ToDictionary(x => x, x => (false, (long)0));
+
+            // look when each parentOfParent sends high pulse to their output
+            while (parentOFParentStates.Values.Any(x => !x.Item1))
+            {
+                if (iterationFinished)
+                {
+                    allPulses.Add(new PulseResult() { Pulse = Pulse.Low, ToModule = "broadcaster", FromModule = "button" });
+                    buttonCounter++;
+                }
+
+                var pulse = allPulses[currentIteration++];
+
+                if (parentOFParentStates.ContainsKey(pulse.FromModule) 
+                    && ((ConjuctionModule)dictionary[pulse.FromModule]).InputModuleStates.Any(x => x.Value == Pulse.Low))
+                {
+                    parentOFParentStates[pulse.FromModule] = (true, buttonCounter);
+                }
+
+                if (dictionary.ContainsKey(pulse.ToModule))
+                {
+                    var currentModule = dictionary[pulse.ToModule];
+
+                    var processResult = currentModule.ProceedPulse(pulse.Pulse, pulse.FromModule);
+                    if (processResult != null && processResult.Count > 0)
+                    {
+                        allPulses.AddRange(processResult);
+                    }
+                }
+
+                iterationFinished = allPulses.Count == currentIteration;
+            }
+
+            long result = 1;
+
+            foreach (var counter in parentOFParentStates.Values.Select(x => x.Item2))
+            {
+                result *= counter;
+            }
+
+            Console.WriteLine(result);
+        }
+
+        private static void PopulateModules(string[] input, List<IModule> modules)
+        {
             var conjuctionModules = new List<ConjuctionModule>();
 
             foreach (var item in input)
@@ -38,46 +145,6 @@
                 var inputs = modules.Where(x => x.ConnectedTo.Contains(conModule.Name)).Select(x => x.Name);
                 conModule.InitializeInputStates(inputs);
             }
-
-            var result = 1;
-            var firstPulse = new PulseResult() { Pulse = Pulse.Low, ToModule = "broadcaster", FromModule = "button"};
-            var allPulses = new List<PulseResult>() { firstPulse };
-            var buttonCounter = 1;
-            var dictionary = modules.ToDictionary(x => x.Name, x => x);
-            var currentIteration = 0;
-            bool iterationFinished = false;
-
-            var exitCondition = iterationFinished && 
-                (modules.Where(m => m is FlipFlopModule ffm).All(m => !(m as FlipFlopModule).IsOn) || buttonCounter == 1000);
-
-            while (!exitCondition)
-            {
-                if (iterationFinished) 
-                { 
-                    allPulses.Add(new PulseResult() { Pulse = Pulse.Low, ToModule = "broadcaster", FromModule = "button" }); 
-                    buttonCounter++;
-                }
-
-                var pulse = allPulses[currentIteration++];
-
-                var currentModule = dictionary[pulse.ToModule];
-
-                var processResult = currentModule.ProceedPulse(pulse.Pulse, pulse.FromModule);
-                if (processResult != null && processResult.Count > 0) 
-                {
-                    allPulses.AddRange(processResult);
-                }
-
-                iterationFinished = allPulses.Count == currentIteration;
-            }
-
-            Console.WriteLine(result);
-        }
-
-        internal static void Part2()
-        {
-            var input = Reader.ReadAsString("2023", "Day19");
-            Console.WriteLine();
         }
     }
 }
