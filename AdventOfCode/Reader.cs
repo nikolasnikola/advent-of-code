@@ -105,7 +105,7 @@ namespace AdventOfCode
             return matrix;
         }
 
-        internal static Dictionary<(int, int), int> ReadAsIntegerDictionaryMatrix(string year, string fileName, char? splitter = null)
+        internal static Dictionary<(int, int), int> ReadAsIntegerDictionaryMatrix(string year, string fileName)
         {
             var lines = GetLines(year, fileName);
             return (
@@ -115,6 +115,28 @@ namespace AdventOfCode
                 let pos = (row, col)
                 select new KeyValuePair<(int, int), int>(pos, cell)
             ).ToDictionary(x => x.Key, v => v.Value);
+        }
+
+        internal static Dictionary<(int, int), char> ReadAsCharDictionaryMatrixWithStartPoint(string year, string fileName, char startSymbol, out (int, int) point)
+        {
+            var lines = GetLines(year, fileName);
+            int i = 0;
+            var matrix = new Dictionary<(int, int), char>();
+            point = (0, 0);
+
+            foreach (var line in lines)
+            {
+                int j = 0;
+                foreach (var c in line)
+                {
+                    if (c == startSymbol) point = (i, j);
+                    matrix.Add((i, j), c);
+                    j++;
+                }
+                i++;
+            }
+
+            return matrix;
         }
 
         private static string[] GetLines(string year, string fileName)
