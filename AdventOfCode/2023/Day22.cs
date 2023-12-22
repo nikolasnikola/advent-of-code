@@ -13,11 +13,8 @@
             ProcessFalling(bricksOrdered, minZ, maxZ);
 
             var allBricks = bricksOrdered.Select(x => x.Id);
-
             var topBricks = allBricks.Except(bricksOrdered.SelectMany(x => x.SettledOn).Distinct());
-
             var singleSupporters = bricksOrdered.Where(x => x.SettledOn.Count == 1).Select(x => x.SettledOn.Single()).Distinct();
-
             var multipleSupporters = bricksOrdered.Where(x => x.SettledOn.Count > 1).SelectMany(x => x.SettledOn).Distinct().Except(singleSupporters).Distinct();
 
             Console.WriteLine(topBricks.Count() + multipleSupporters.Count());
@@ -36,6 +33,7 @@
             var singleSupporters = bricksOrdered.Where(x => x.SettledOn.Count == 1).Select(x => x.SettledOn.Single()).Distinct();
 
             var result = 0;
+
             foreach (var singleSupporter in singleSupporters)
             {
                 var willFall = new HashSet<int>();
@@ -143,11 +141,6 @@
         public bool Settled { get; set; }
         public HashSet<int> SettledOn { get; set; }
         public HashSet<int> Supports { get; set; }
-
-        public bool IsSingleCube => Cube1.X == Cube2.X && Cube1.Y == Cube2.Y && Cube1.Z == Cube2.Z;
-        public int XLength => Math.Abs(Cube1.X - Cube2.X) + 1;
-        public int YLength => Math.Abs(Cube1.Y - Cube2.Y) + 1;
-        public int ZLength => Math.Abs(Cube1.Z - Cube2.Z) + 1;
     }
 
     public class BrickCube
