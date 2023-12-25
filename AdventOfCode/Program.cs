@@ -8,10 +8,10 @@ using AdventOfCode._2023;
 //Day24.Part2();
 
 //Day23.Part1();
-//Day23.Part2();
+Day23.Part2();
 
 //Day22.Part1();
-Day22.Part2();
+//Day22.Part2();
 
 //Day21.Part1();
 //Day21.Part2();
