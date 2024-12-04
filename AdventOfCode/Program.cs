@@ -1,6 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-using AdventOfCode._2023;
+using AdventOfCode._2024;
 
 //Day25.Part1();
 
@@ -8,7 +8,7 @@ using AdventOfCode._2023;
 //Day24.Part2();
 
 //Day23.Part1();
-Day23.Part2();
+//Day23.Part2();
 
 //Day22.Part1();
 //Day22.Part2();
@@ -68,7 +68,7 @@ Day23.Part2();
 //Day04.Part2();
 
 //Day03.Part1();
-//Day03.Part2();
+Day03.Part2();
 
 //Day02.Part1();
 //Day02.Part2();
